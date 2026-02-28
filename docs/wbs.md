@@ -1,7 +1,30 @@
 # MeetLens WBS（Work Breakdown Structure）
 
 ## 概要
-環境準備 → 設計 → 実装 の3フェーズ構成で、MVPリリースまでのタスクを管理。
+**開発手法**: 仕様駆動開発（SDD - Specification-Driven Development）
+
+流れ: SDD基盤準備 → 仕様ドキュメント作成 → 実装 の3フェーズ構成でMVPリリースまでのタスクを管理。
+
+---
+
+## Phase 0: SDD基盤準備（仕様駆動開発の準備）
+
+### 0.1 プロジェクト初期化（完了）
+- [x] Git リポジトリ初期化
+  - [x] git init
+  - [x] GitHub リモート設定（git@github.com:katsuki-ishii/meetlens.git）
+  - [x] 初期コミット・push
+- [x] プロジェクト構造構築
+  - [x] frontend/、backend/、infra/、docs/ ディレクトリ作成
+  - [x] 各パスに README.md 作成
+- [x] ドキュメント・設定作成
+  - [x] CLAUDE.md（Claude Code ガイダンス、プロジェクト性質・制約記載）
+  - [x] meetlens-concept.md（プロジェクト概要）
+  - [x] WBS（このファイル）
+  - [x] Claude Code 言語・モデル設定（Japanese、Opus）
+- [x] SDD ディレクトリ構成準備（本フェーズ進行中）
+  - [ ] docs/specs/ ディレクトリ作成（仕様ドキュメント置き場）
+  - [ ] .claude/rules/ ディレクトリ作成（コード規約置き場）
 
 ---
 
@@ -65,9 +88,11 @@
 
 ---
 
-## Phase 2: 設計
+## Phase 2: 仕様ドキュメント作成（SDD：仕様が実装の源）
 
-### 2.1 データモデル・DB設計
+このフェーズで作成される仕様ドキュメント（docs/specs/）が、実装判断の根拠となる。全ての実装はこの仕様から導出される。
+
+### 2.1 API仕様書作成（docs/specs/api.md）
 - [ ] DynamoDB スキーマ定義
   - [ ] Meetings テーブル（PK: TenantID + MeetingID）
   - [ ] Analytics テーブル（会議スコア・メトリクス）
@@ -77,15 +102,24 @@
 - [ ] データ保持ポリシー（TTL 設定等）
 
 ### 2.2 API 仕様書作成
-- [ ] REST API エンドポイント定義
+- [ ] REST API エンドポイント定義（OpenAPI/Swagger 形式）
   - [ ] 認証（POST /auth/login）
   - [ ] VTT アップロード（POST /meetings/upload）
   - [ ] 会議取得（GET /meetings, GET /meetings/{id}）
   - [ ] 分析結果取得（GET /meetings/{id}/analytics）
-- [ ] リクエスト/レスポンス スキーマ（OpenAPI/Swagger）
+- [ ] リクエスト/レスポンス スキーマ詳細定義
 - [ ] エラーハンドリング・ステータスコード仕様
 
-### 2.3 VTT パーサー仕様
+### 2.2 データモデル・DB設計仕様（docs/specs/data-model.md）
+- [ ] DynamoDB スキーマ定義
+  - [ ] Meetings テーブル（PK: TenantID + MeetingID）
+  - [ ] Analytics テーブル（会議スコア・メトリクス）
+  - [ ] Users テーブル（Cognito 連携）
+  - [ ] インデックス（GSI）設計
+- [ ] スキーマ詳細（型、制約、デフォルト値）
+- [ ] データ保持ポリシー（TTL 設定等）
+
+### 2.3 VTT パーサー仕様（docs/specs/vtt-parser.md）
 - [ ] VTT ファイル形式の詳細解析
   - [ ] WEBVTT ヘッダー、メタデータ取得
   - [ ] タイムスタンプ範囲（HH:MM:SS.mmm --> HH:MM:SS.mmm）
@@ -94,7 +128,7 @@
 - [ ] 言語別対応（日本語音声認識誤り補正戦略）
 - [ ] エッジケース処理（複数話者、タイムコード欠落 等）
 
-### 2.4 スコアリング・分析アルゴリズム設計
+### 2.4 スコアリング・分析アルゴリズム仕様（docs/specs/scoring.md）
 - [ ] 会議タイプごとのメトリクス定義
   - [ ] **定例**：意思決定数、脱線率、時間効率
   - [ ] **デイリースクラム**：実施時間、発言均等性
@@ -103,7 +137,7 @@
 - [ ] スコアリング重み付けテーブル
 - [ ] 品質判定基準（優秀/良好/改善必要 等）
 
-### 2.5 UI/UX 設計
+### 2.5 UI/UX 仕様（docs/specs/ui.md）
 - [ ] ページ遷移図・フロー設計
   - [ ] ログイン → ダッシュボード → 詳細画面
   - [ ] VTT アップロードモーダル
@@ -113,13 +147,25 @@
   - [ ] メタデータ入力フォーム
 - [ ] コンポーネント設計書
 
-### 2.6 認証フロー設計
+### 2.6 認証フロー仕様（docs/specs/auth.md）
 - [ ] Cognito ユーザープール設定
   - [ ] ユーザー属性（TenantID 等）
   - [ ] パスワードポリシー
 - [ ] JWT トークン管理戦略
   - [ ] トークン有効期限、リフレッシュトークン
   - [ ] フロントエンド・バックエンド間の検証
+
+### 2.7 コード規約・ルール（.claude/rules/）
+- [ ] フロントエンド規約（.claude/rules/frontend.md）
+  - [ ] ファイル命名規約、ディレクトリ構成
+  - [ ] Vue 3・TypeScript コーディング規約
+  - [ ] コンポーネント設計パターン
+  - [ ] 状態管理（Pinia）ルール
+- [ ] バックエンド規約（.claude/rules/backend.md）
+  - [ ] ファイル命名規約、ディレクトリ構成
+  - [ ] Python コーディング規約
+  - [ ] Lambda 関数設計パターン
+  - [ ] エラーハンドリング・ロギング規約
 
 ---
 
