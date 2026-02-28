@@ -30,22 +30,6 @@
 
 ## Phase 1: 環境準備
 
-### 1.0 プロジェクト初期化（完了）
-- [x] Git リポジトリ初期化
-  - [x] git init
-  - [x] GitHub リモート設定（git@github.com:katsuki-ishii/meetlens.git）
-  - [x] 初期コミット・push
-- [x] プロジェクト構造構築
-  - [x] frontend/、backend/、infra/、docs/ ディレクトリ作成
-  - [x] 各パスに README.md 作成
-- [x] ドキュメント作成
-  - [x] CLAUDE.md（Claude Code ガイダンス）
-  - [x] meetlens-concept.md（プロジェクト概要）
-  - [x] WBS（このファイル）
-- [x] 開発環境設定
-  - [x] Claude Code 言語設定（Japanese）
-  - [x] Claude Code モデル設定（Opus）
-
 ### 1.1 フロントエンド環境構築
 - [ ] Vue 3 + TypeScript プロジェクト初期化
   - [ ] Vite による プロジェクトセットアップ
@@ -92,25 +76,7 @@
 
 このフェーズで作成される仕様ドキュメント（docs/specs/）が、実装判断の根拠となる。全ての実装はこの仕様から導出される。
 
-### 2.1 API仕様書作成（docs/specs/api.md）
-- [ ] DynamoDB スキーマ定義
-  - [ ] Meetings テーブル（PK: TenantID + MeetingID）
-  - [ ] Analytics テーブル（会議スコア・メトリクス）
-  - [ ] Users テーブル（Cognito 連携）
-  - [ ] インデックス（GSI）設計
-- [ ] 従量制フリー度合い検討（オンデマンド vs プロビジョニング）
-- [ ] データ保持ポリシー（TTL 設定等）
-
-### 2.2 API 仕様書作成
-- [ ] REST API エンドポイント定義（OpenAPI/Swagger 形式）
-  - [ ] 認証（POST /auth/login）
-  - [ ] VTT アップロード（POST /meetings/upload）
-  - [ ] 会議取得（GET /meetings, GET /meetings/{id}）
-  - [ ] 分析結果取得（GET /meetings/{id}/analytics）
-- [ ] リクエスト/レスポンス スキーマ詳細定義
-- [ ] エラーハンドリング・ステータスコード仕様
-
-### 2.2 データモデル・DB設計仕様（docs/specs/data-model.md）
+### 2.1 データモデル・DB設計仕様（docs/specs/data-model.md）
 - [ ] DynamoDB スキーマ定義
   - [ ] Meetings テーブル（PK: TenantID + MeetingID）
   - [ ] Analytics テーブル（会議スコア・メトリクス）
@@ -118,6 +84,15 @@
   - [ ] インデックス（GSI）設計
 - [ ] スキーマ詳細（型、制約、デフォルト値）
 - [ ] データ保持ポリシー（TTL 設定等）
+
+### 2.2 API仕様書作成（docs/specs/api.md）
+- [ ] REST API エンドポイント定義（OpenAPI/Swagger 形式）
+  - [ ] 認証（POST /auth/login）
+  - [ ] VTT アップロード（POST /meetings/upload）
+  - [ ] 会議取得（GET /meetings, GET /meetings/{id}）
+  - [ ] 分析結果取得（GET /meetings/{id}/analytics）
+- [ ] リクエスト/レスポンス スキーマ詳細定義
+- [ ] エラーハンドリング・ステータスコード仕様
 
 ### 2.3 VTT パーサー仕様（docs/specs/vtt-parser.md）
 - [ ] VTT ファイル形式の詳細解析
@@ -138,6 +113,7 @@
 - [ ] 品質判定基準（優秀/良好/改善必要 等）
 
 ### 2.5 UI/UX 仕様（docs/specs/ui.md）
+
 - [ ] ページ遷移図・フロー設計
   - [ ] ログイン → ダッシュボード → 詳細画面
   - [ ] VTT アップロードモーダル
