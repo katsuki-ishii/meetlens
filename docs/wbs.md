@@ -22,9 +22,6 @@
   - [x] meetlens-concept.md（プロジェクト概要）
   - [x] WBS（このファイル）
   - [x] Claude Code 言語・モデル設定（Japanese、Opus）
-- [x] SDD ディレクトリ構成準備（本フェーズ進行中）
-  - [ ] docs/specs/ ディレクトリ作成（仕様ドキュメント置き場）
-  - [ ] .claude/rules/ ディレクトリ作成（コード規約置き場）
 
 ---
 
