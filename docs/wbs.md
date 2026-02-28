@@ -27,17 +27,17 @@
 
 ## Phase 1: 環境準備
 
-### 1.1 フロントエンド環境構築
-- [ ] Vue 3 + TypeScript プロジェクト初期化
-  - [ ] Vite による プロジェクトセットアップ
-  - [ ] TypeScript 設定（tsconfig.json）
-  - [ ] ESLint + Prettier 設定
-- [ ] PrimeVue インストール・設定
-  - [ ] コンポーネントライブラリ統合
+### 1.1 フロントエンド環境構築（完了）
+- [x] Vue 3 + TypeScript プロジェクト初期化
+  - [x] Vite による プロジェクトセットアップ
+  - [x] TypeScript 設定（tsconfig.json）
+  - [x] ESLint + Prettier 設定
+- [x] PrimeVue インストール・設定
+  - [x] コンポーネントライブラリ統合
   - [ ] テーマ選択・カスタマイズ
-- [ ] 状態管理（Pinia）セットアップ
+- [x] 状態管理（Pinia）セットアップ
   - [ ] ストア構造設計・初期化
-- [ ] Vitest + Vue Test Utils テスト環境構築
+- [x] Vitest + Vue Test Utils テスト環境構築
 
 ### 1.2 バックエンド環境構築
 - [ ] Python Lambda 開発環境
