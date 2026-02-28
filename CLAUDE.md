@@ -4,84 +4,76 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## プロジェクト概要
 
-**MeetLens**は、会議のトランスクリプトを処理して会議の品質を分析・可視化するWebアプリケーションです。単なる議事録生成ツールではなく、会議の質を定量化してスコア化し、組織の会議文化の改善を目指します。
+**MeetLens** は会議の品質を分析・可視化するWebアプリケーション。VTT（字幕ファイル）トランスクリプトを処理して、議事録自動生成と品質スコアリングを実施。組織の会議文化改善を目的とする個人開発プロジェクト。
 
-**MVP スコープ**: WebVTT形式（字幕フォーマット）で、Teams・Zoom・Webexから出力されたトランスクリプトを処理。議事録の自動生成と品質分析、過去の会議記録の参照ダッシュボードを提供。
+**MVP**: VTT（Teams/Zoom/Webex対応）アップロード → 議事録生成 → 品質分析 → ダッシュボード表示
 
-**主要機能**:
-- AWS Cognitoを使用したユーザー認証
-- VTTファイルのアップロード（タイトル・会議タイプ・開催日時のメタデータ付き）
-- Amazon Bedrockを使用した自動議事録生成
-- 会議タイプ別の品質スコア化（定例会、デイリースクラム、1on1、ブレストと振り返り）
-- ウェブデータを使用した発言内容のファクトチェック
-- 会議記録の永続化と履歴分析の提供
+## テック スタック
 
-## アーキテクチャ
+| レイヤー | 技術 |
+|---------|------|
+| フロントエンド | Vue 3 + TypeScript + PrimeVue |
+| バックエンド | Python Lambda |
+| LLM | Amazon Bedrock |
+| DB | Amazon DynamoDB |
+| 認証 | Amazon Cognito |
+| ストレージ | Amazon S3 |
+| IaC | SAM + Terraform |
 
-### 技術スタック
-- **フロントエンド**: Vue 3 + TypeScript + PrimeVue
-- **バックエンド**: Python Lambda（AWS サーバーレス）
-- **LLM**: Amazon Bedrock
-- **認証**: Amazon Cognito
-- **データベース**: Amazon DynamoDB（TenantIDをパーティションキーとするテナント対応スキーマ）
-- **ストレージ**: Amazon S3
-- **IaC**: SAM（Lambda/API Gateway）、Terraform（基盤部分）
-- **CI/CD**: AWS CodePipeline/CodeBuild
+**重要な設計判断:**
+- **テナント優先**: DynamoDBスキーマは`TenantID`をPKとして設計（MVPでも複数テナント対応を前提）
+- **会議タイプ別スコア**: 定例・デイリースクラム・1on1・ブレスト で異なる評価ロジック
+- **JSON in DB**: HTMLは補助的、DynamoDBのJSON が唯一の真実のソース
 
-### 処理フロー
-1. ユーザーが.vttファイルと会議メタデータをフロントエンドにアップロード
-2. ファイルはS3に保存、VTT内容はDynamoDBに格納
-3. バックエンド Lambda が トランスクリプトを処理:
-   - VTT解析（話者名、タイムスタンプ、テキスト抽出）
-   - Bedrock送信で議事録生成と分析実行
-   - 品質メトリクス抽出：意思決定数、アクションアイテム、発言者参加度、脱線率など
-   - ウェブ検索APIで発言内容の事実確認
-4. 結果をDynamoDB記録として保存、必要に応じてHTMLも生成
-5. フロントエンドが会議一覧（フィルタリング機能付き）と詳細分析を表示
+## ファイル構成
 
-### データモデル - 重要なパターン
-- **テナント分離**: 全テーブルはパーティションキーとして`TenantID`を使用。MVPでも複数テナント対応を前提に設計
-- **会議タイプ**: 定例、デイリースクラム、1on1、ブレスト・振り返り各々で異なるスコア重み付けを適用
-- **品質メトリクス**:
-  - アウトプット系：明確な決定数、保留・先送り、未決件数、アクションアイテムの具体性（担当・期限の有無）、新規アイデア・論点検出
-  - プロセス系：話者の発言時間・回数の分布（偏り度合い）、脱線率、時間あたりの議題消化率
-
-### VTT フォーマット
-WebVTTは共通入力フォーマットです。構造例：
 ```
-WEBVTT
-
-00:00:00.000 --> 00:00:05.000
-Speaker Name: 話された内容
-
-00:00:05.000 --> 00:00:10.000
-別の話者: さらにテキスト
+frontend/         Vue 3 プロジェクト
+backend/          Python Lambda 関数
+infra/            SAM テンプレート + Terraform
+docs/             アーキテクチャ・API仕様・開発ガイド
 ```
-パーサは：タイムスタンプ範囲、話者名、テキスト内容を抽出。日本語音声認識の誤りはLLMに文脈補正させる。
 
-## 開発ノート
+詳細は [docs/architecture.md](docs/architecture.md) を参照。
 
-### 環境セットアップ（コードベース構築時）
-- フロントエンド: `npm install && npm run dev`（Vue 3開発サーバー）
-- バックエンド: Lambda 関数はAWS SAM CLIとPython 3.x ランタイムが必要
-- ローカルテスト時はAWS認証情報が必要（Bedrock、DynamoDB、S3アクセス用）
+## コマンド リファレンス
 
-### 重要な設計判断
-1. **サーバーレス優先**: Python Lambdaは運用オーバーヘッドを最小化。リクエスト量に応じて動的スケール
-2. **Bedrock採用**: マネージドサービスでOpenAI APIへの依存と継続的コスト負担を回避
-3. **DynamoDB + S3**: スパーススキーマ（JSON属性）と大容量ファイル処理に最適。DB肥大化を防止
-4. **テナント優先スキーマ**: 単一ユーザーMVPでもDynamoDBスキーマに`TenantID`を組み込み。将来の多テナント対応時の移行コストを削減
-5. **VTT単一入力フォーマット**: 複数プラットフォーム間での統一化。MVPではAPI統合なし
+### フロントエンド
+```bash
+cd frontend
+npm install && npm run dev      # 開発サーバー起動
+npm run build                   # ビルド
+npm run test                    # テスト
+```
 
-### 機能追加時の留意点
-- テナント分離を常に確保（DynamoDBクエリが`TenantID`でフィルタ）
-- 会議タイプロジックはスコア計算関数内にパラメータ化（重み付けは会議タイプ依存）
-- 新規メトリクスはLambda内で計算し、DynamoDB保存後にフロントエンド表示
-- HTMLは補助的。JSON inDynamoDBが唯一の真実のソース
+### バックエンド
+```bash
+cd backend
+pip install -r requirements.txt
+make build                      # SAM ビルド
+make test                       # テスト
+```
 
-### 将来機能（MVP外）
-- 会議シリーズのトレンド分析
-- Microsoft Graph API経由のVTT自動取得
-- 内部データ連携による事実確認拡張
-- 会議シリーズ概念（「毎週月曜の定例」を一括追跡）
-- 品質低下アラート・通知機能
+### IaC
+```bash
+cd infra/terraform
+terraform init
+terraform plan -var-file=environments/dev.tfvars
+terraform apply -var-file=environments/dev.tfvars
+```
+
+詳細は [docs/development.md](docs/development.md) を参照。
+
+## プロジェクト固有の注意点
+
+- **VTT パーサー**: WebVTT形式。日本語音声認識誤りはLLMに文脈補正させる
+- **AWS認証**: ローカルテストに AWS CLI 認証情報が必須（Bedrock、DynamoDB、S3）
+- **テナント分離**: 全DynamoDB クエリは`TenantID`でフィルタ必須
+- **スコア重み付け**: 会議タイプごとに異なる。backend/services/metrics.py 参照
+
+## 関連ドキュメント
+
+- [プロジェクト概要](meetlens-concept.md)
+- [WBS・タスク管理](docs/wbs.md)
+- [アーキテクチャ詳細](docs/architecture.md)
+- [開発ガイド](docs/development.md)
