@@ -1,66 +1,21 @@
 # CLAUDE.md
 
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 ## プロジェクト概要
 
-**MeetLens** - 会議品質分析ツール。VTTトランスクリプト → 議事録生成 + スコアリング。
+**MeetLens** は会議の品質を分析・可視化するWebアプリケーション。VTT（字幕ファイル）トランスクリプトを処理して、議事録自動生成と品質スコアリングを実施。組織の会議文化改善を目的とする個人開発プロジェクト。
 
-## テック スタック
+**MVP**: VTT（Teams/Zoom/Webex対応）アップロード → 議事録生成 → 品質分析 → ダッシュボード表示
 
-- **Frontend**: Vue 3 + TypeScript + PrimeVue
-- **Backend**: Python Lambda
-- **LLM**: Amazon Bedrock
-- **DB**: DynamoDB（`TenantID` パーティション）
-- **Auth**: Cognito
-- **Storage**: S3
-- **IaC**: SAM + Terraform
-
-## コマンド
-
-```bash
-# Frontend
-cd frontend && npm install && npm run dev
-
-# Backend
-cd backend && pip install -r requirements.txt && make test
-
-# IaC
-cd infra/terraform && terraform init && terraform plan -var-file=environments/dev.tfvars
-```
+## プロジェクトの性質
+- このプロジェクトは学習目的の個人開発プロジェクトである。
+- Bedrockやサーバーレスアーキテクチャの学習を主目的としている。
 
 ## 制約
-
-### コスト制約
-- 個人開発なので AWS 費用を最小化必須
-- Lambda 実行時間・メモリサイズが直結（ billable duration × memory）
-- DynamoDB オンデマンド課金 → スパイク費用に注意
-- Bedrock API 呼び出しコストが主要費用
-
-### 技術的制約
-- **Lambda**: 実行時間 15分、メモリ 10GB、同時実行数リージョン制限
-- **VTT 大容量ファイル**: Step Functions で分割処理検討必要
-- **イベント駆動・ステートレス設計** 必須
-- **CloudWatch ログ** に依存（traditional APM 難しい）
-- **Bedrock リージョン限定** (us-west-2 等)
-
-### スケーラビリティ制約
-- Lambda 同時実行数制限（リージョン別、デフォルト 1000）
-- DynamoDB スループット（オンデマンド時も上限あり）
-- S3 リクエストレート（無制限に近いが、実装工夫必要）
-
-### 開発スキル制約
-- 個人開発なので自分で運用・デバッグできる範囲に限定
-- AWS サービス複雑化は技術負債の可能性 → シンプル設計優先
-
-## 重要な注意点
-
-- **テナント分離**: 全DynamoDBクエリは `TenantID` でフィルタ必須
-- **VTT パーサー**: WebVTT形式。日本語音声認識誤りはLLMに補正させる
-- **会議タイプ別スコア**: 定例・スクラム・1on1・ブレスト で異なる重み付け
-- **JSON in DB**: DynamoDBのJSON が唯一の真実のソース
-
-## 詳細ドキュメント
-
-- [アーキテクチャ](docs/architecture.md)
-- [開発ガイド](docs/development.md)
-- [WBS](docs/wbs.md)
-- [プロジェクト概要](meetlens-concept.md)
+- 開発者は日本人であるため、特に明示的な指示がない場合は日本語で答える。
+- 開発者の理解負債を防ぐために、一度に大量のファイル生成は控える。
+- ルートディレクトリのdocsを毎回確認し、実装と各種ルールや要件、docs/wbs.mdの進捗に不整合が起きないようにする。
+- 小まめにgitへのコミットを行い、コミットメッセージもわかりやすく簡潔に残すこと。
+- 危険な操作（削除・破壊・上書き）は必ず確認を取る。
+- 実行前提が不明な場合、推測で作業せず、**実行前に必ず質問して確認すること**。
