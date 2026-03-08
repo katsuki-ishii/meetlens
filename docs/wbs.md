@@ -39,12 +39,12 @@
 
 ### 1.2 バックエンド環境構築
 - [x] Python Lambda 開発環境
-  - [x] Python 3.x + pip 環境
-  - [x] requirements.txt 作成（Bedrock SDK、boto3 等）
-- [x] AWS SAM CLI インストール・設定
-  - [ ] sam.yaml テンプレート初期化
-  - [ ] ローカルデバッグ環境（SAM Local）
-- [x] pytest + moto テスト環境
+  - [x] Python 3.13 + pip + venv
+  - [x] requirements.txt / requirements-dev.txt 作成
+- [x] AWS SAM CLI インストール確認（v1.152.0）
+  - [ ] sam.yaml テンプレート初期化（Phase 3 で実施）
+  - [ ] ローカルデバッグ環境（SAM Local、Docker 必要 → Phase 3 で実施）
+- [x] pytest + moto テスト環境（DynamoDB/S3 モックはmotoで代替）
 
 ### 1.3 IaC環境構築（完了）
 - [x] Terraform 初期化
@@ -55,7 +55,7 @@
   - [x] AWS CLI configure
   - [x] 必要な IAM ロール確認
 
-### 1.4 CI/CD 基盤準備
+### 1.4 CI/CD 基盤準備（実装が進んでから実施）
 - [ ] GitHub Actions ワークフロー初期化
   - [ ] Lint + テスト自動化
   - [ ] デプロイメント パイプライン（dev/prod）
@@ -220,8 +220,7 @@
 
 ### 3.3 IaC 実装
 
-#### 3.3.1 Terraform 実装
-- [ ] main.tf（プロバイダー、リージョン等）
+#### 3.3.1 Terraform リソース実装（main.tf/variables.tf は 1.3 で作成済み）
 - [ ] cognito.tf（Cognito ユーザープール・クライアント）
 - [ ] dynamodb.tf（テーブル・インデックス定義）
 - [ ] s3.tf（VTT ストレージ、HTML 出力）
