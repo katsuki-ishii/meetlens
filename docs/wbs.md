@@ -3,7 +3,7 @@
 ## 概要
 **開発手法**: 仕様駆動開発（SDD - Specification-Driven Development）
 
-流れ: SDD基盤準備 → 仕様ドキュメント作成 → 実装 の3フェーズ構成でMVPリリースまでのタスクを管理。
+流れ: 基盤準備 → 環境構築 → 要件定義 → 仕様作成 → 実装 のフェーズ構成でMVPリリースまでのタスクを管理。
 
 タスク管理: [GitHub Projects](https://github.com/users/katsuki-ishii/projects/1)（カンバン）
 詳細タスクは各Issueを参照。
@@ -21,7 +21,10 @@
 ## Todo（Phase 1）
 - #5 CI/CD基盤準備 — 実装が進んでから実施
 
-## Todo（Phase 2: 仕様ドキュメント作成）
+## Todo（要件定義）
+- #13 MVP要件定義 — concept.md を元にスコープ・優先度を確定
+
+## Todo（Phase 2: 仕様ドキュメント作成）— 要件定義の後に着手
 - #6 データモデル・DB設計仕様
 - #7 API仕様書作成
 - #8 VTTパーサー仕様
