@@ -46,14 +46,14 @@
   - [ ] ローカルデバッグ環境（SAM Local）
 - [x] pytest + moto テスト環境
 
-### 1.3 IaC環境構築
-- [ ] Terraform 初期化
-  - [ ] terraform/ ディレクトリ構造
-  - [ ] .gitignore（.tfstate 等）
-  - [ ] 環境別 tfvars ファイル（dev.tfvars, prod.tfvars）
-- [ ] AWS 認証情報の設定
-  - [ ] AWS CLI configure
-  - [ ] 必要な IAM ロール確認
+### 1.3 IaC環境構築（完了）
+- [x] Terraform 初期化
+  - [x] terraform/ ディレクトリ構造
+  - [x] .gitignore（.tfstate 等）
+  - [x] 環境別 tfvars ファイル（dev.tfvars, prod.tfvars）
+- [x] AWS 認証情報の設定
+  - [x] AWS CLI configure
+  - [x] 必要な IAM ロール確認
 
 ### 1.4 CI/CD 基盤準備
 - [ ] GitHub Actions ワークフロー初期化
