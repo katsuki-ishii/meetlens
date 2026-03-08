@@ -51,7 +51,6 @@
   - [ ] terraform/ ディレクトリ構造
   - [ ] .gitignore（.tfstate 等）
   - [ ] 環境別 tfvars ファイル（dev.tfvars, prod.tfvars）
-- [ ] SAM テンプレート（sam.yaml）の確立
 - [ ] AWS 認証情報の設定
   - [ ] AWS CLI configure
   - [ ] 必要な IAM ロール確認
