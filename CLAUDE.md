@@ -12,6 +12,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - このプロジェクトは学習目的の個人開発プロジェクトである。
 - Bedrockやサーバーレスアーキテクチャの学習を主目的としている。
 
+## タスク管理
+- **GitHub Projects**（カンバン）で管理: https://github.com/users/katsuki-ishii/projects/1
+- **docs/wbs.md** は全体俯瞰用。Issue番号で各タスクを参照する形式。
+- **各GitHub Issue** に詳細なサブタスク（チェックリスト）を記載。
+- タスク着手時はIssueのステータスを更新し、完了時はクローズする。`gh` コマンドで操作する。
+- 新しいタスクが発生したらIssueを作成し、Projectに追加、wbs.mdも更新する。
+
 ## 制約
 - 開発者は日本人であるため、特に明示的な指示がない場合は日本語で答える。
 - 開発者の理解負債を防ぐために、一度に大量のファイル生成は控える。
