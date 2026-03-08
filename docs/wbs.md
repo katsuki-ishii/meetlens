@@ -34,21 +34,17 @@
   - [x] ESLint + Prettier 設定
 - [x] PrimeVue インストール・設定
   - [x] コンポーネントライブラリ統合
-  - [ ] テーマ選択・カスタマイズ
 - [x] 状態管理（Pinia）セットアップ
-  - [ ] ストア構造設計・初期化
 - [x] Vitest + Vue Test Utils テスト環境構築
 
 ### 1.2 バックエンド環境構築
-- [ ] Python Lambda 開発環境
-  - [ ] Python 3.x + pip 環境
-  - [ ] requirements.txt 作成（Bedrock SDK、boto3 等）
-- [ ] AWS SAM CLI インストール・設定
+- [x] Python Lambda 開発環境
+  - [x] Python 3.x + pip 環境
+  - [x] requirements.txt 作成（Bedrock SDK、boto3 等）
+- [x] AWS SAM CLI インストール・設定
   - [ ] sam.yaml テンプレート初期化
   - [ ] ローカルデバッグ環境（SAM Local）
-- [ ] DynamoDB Local 開発環境
-  - [ ] Docker または DynamoDB Local インストール
-- [ ] pytest + moto テスト環境（AWS mocking）
+- [x] pytest + moto テスト環境
 
 ### 1.3 IaC環境構築
 - [ ] Terraform 初期化
