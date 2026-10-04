@@ -16,15 +16,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## タスク管理
 - **GitHub Projects**（カンバン）で管理: https://github.com/users/katsuki-ishii/projects/1
-- **docs/wbs.md** は全体俯瞰用。Issue番号で各タスクを参照する形式。
+- **進捗状態の正はGitHub Projects**。状態（Todo / In Progress / Done）はProjectsでのみ管理する。
+- **docs/wbs.md** はフェーズ構成とIssueの対応を示す全体図。進捗状態は記載しない。
 - **各GitHub Issue** に詳細なサブタスク（チェックリスト）を記載。
 - タスク着手時はIssueのステータスを更新し、完了時はクローズする。`gh` コマンドで操作する。
-- 新しいタスクが発生したらIssueを作成し、Projectに追加、wbs.mdも更新する。
+- 新しいタスクが発生したらIssueを作成し、Projectに追加、wbs.mdの該当フェーズにIssue番号を追記する。
 
 ## 制約
 - 開発者は日本人であるため、特に明示的な指示がない場合は日本語で答える。
 - 開発者の理解負債を防ぐために、一度に大量のファイル生成は控える。
-- ルートディレクトリのdocsを毎回確認し、実装と各種ルールや要件、docs/wbs.mdの進捗に不整合が起きないようにする。
+- ルートディレクトリのdocsを毎回確認し、実装と各種ルールや要件、docs/wbs.mdのフェーズ構成に不整合が起きないようにする。
 - 小まめにgitへのコミットを行い、コミットメッセージもわかりやすく簡潔に残すこと。
 - 危険な操作（削除・破壊・上書き）は必ず確認を取る。
 - 実行前提が不明な場合、推測で作業せず、**実行前に必ず質問して確認すること**。
