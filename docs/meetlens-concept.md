@@ -85,7 +85,7 @@ VTTから以下の指標を抽出・分析する。会議タイプに応じて�
 
 | レイヤー | 技術 |
 |---|---|
-| フロントエンド | Vue 3 + TypeScript + PrimeVue |
+| フロントエンド | Vue 3 + TypeScript + Vuetify |
 | バックエンド | Python Lambda |
 | AI/LLM | Amazon Bedrock |
 | 認証 | Amazon Cognito |
