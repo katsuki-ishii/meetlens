@@ -16,9 +16,10 @@
 
 ## Phase 1: 環境構築
 - #2 フロントエンド環境構築
-- #3 バックエンド環境構築 — sam.yaml/SAM Local は Phase 3 で実施
+- #3 バックエンド環境構築 — sam.yaml/SAM Local は Phase 3 に引き継ぎ
 - #4 IaC環境構築
 - #5 CI/CD基盤準備 — 実装が進んでから実施
+- #14 UIライブラリをVuetifyに移行 — PrimeVue有料化のため
 
 ## 要件定義
 - #13 MVP要件定義 — concept.md を元にスコープ・優先度を確定
@@ -35,5 +36,5 @@
 ## Phase 3: 実装 — 仕様確定後にIssue化
 - バックエンド実装（VTTパーサー、LLM連携、スコアリング、Lambda）
 - フロントエンド実装（コンポーネント、状態管理、API連携、ルーティング）
-- IaC実装（Terraform リソース、SAMテンプレート）
+- IaC実装（Terraform リソース、SAMテンプレート、SAM Localによるローカルデバッグ環境 ← #3 から引き継ぎ）
 - デプロイ・テスト（統合テスト、ステージング、本番）
