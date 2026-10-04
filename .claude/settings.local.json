@@ -3,7 +3,23 @@
     "allow": [
       "WebSearch",
       "WebFetch(domain:www.humanlayer.dev)",
-      "WebFetch(domain:www.builder.io)"
+      "WebFetch(domain:www.builder.io)",
+      "WebFetch(domain:github.com)",
+      "mcp__aws-knowledge-mcp-server__aws___search_documentation",
+      "mcp__aws-knowledge-mcp-server__aws___recommend",
+      "Bash(py:*)",
+      "Bash(pip:*)",
+      "Bash(cmd.exe:*)",
+      "Bash(source:*)",
+      "Bash(gh project:*)",
+      "Bash(gh label:*)",
+      "Bash(gh issue:*)",
+      "Bash(do gh:*)",
+      "Bash(find:*)"
     ]
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "aws-knowledge-mcp-server"
+  ]
 }
