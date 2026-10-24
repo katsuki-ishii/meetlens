@@ -5,8 +5,8 @@
       "WebFetch(domain:www.humanlayer.dev)",
       "WebFetch(domain:www.builder.io)",
       "WebFetch(domain:github.com)",
-      "mcp__aws-knowledge-mcp-server__aws___search_documentation",
-      "mcp__aws-knowledge-mcp-server__aws___recommend",
+      "mcp__aws-mcp__aws___search_documentation",
+      "mcp__aws-mcp__aws___retrieve_skill",
       "Bash(py:*)",
       "Bash(pip:*)",
       "Bash(cmd.exe:*)",
@@ -20,6 +20,9 @@
   },
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
-    "aws-knowledge-mcp-server"
+    "aws-mcp",
+    "codex",
+    "vuetify",
+    "context7"
   ]
 }
