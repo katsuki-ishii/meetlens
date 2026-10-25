@@ -71,23 +71,4 @@ VTTファイルをアップロードし、議事録自動生成と品質スコ�
 | VTT上限 | 1ファイル1MB程度・会議2時間程度まで |
 | データ保持 | VTT原本・議事録・分析結果ともに無期限保持 |
 
-### LLM（Bedrock）
-- モデル: **Claude Haiku 5.5**（推論プロファイル `jp.anthropic.claude-haiku-5-5`。国内リージョンで処理）
-- モデルIDは設定値にし、品質が不足する場合は Sonnet 5.5 等へ切り替えられるようにする
-- コスト目安: 1時間の会議で1件あたり約1円（入力約2.2万・出力約1万トークン、Anthropic公式単価で試算。Bedrock の実単価は要確認）
-- VTTはタイムスタンプ等を除いて整形してからLLMに渡し、入力トークンを抑える
-
----
-
-## 技術スタック
-
-| レイヤー | 技術 |
-|---|---|
-| フロントエンド | Vue 3 + TypeScript + Vuetify |
-| バックエンド | Python Lambda |
-| AI/LLM | Amazon Bedrock |
-| 認証 | Amazon Cognito |
-| データベース | Amazon DynamoDB |
-| ファイルストレージ | Amazon S3 |
-| IaC | SAM（サーバーレス部分）/ Terraform（基盤部分） |
-| CI/CD | GitHub Actions |
+技術スタック・LLMのモデル選定は [tech-stack.md](../tech-stack.md) を参照。
