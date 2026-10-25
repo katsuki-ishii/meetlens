@@ -23,6 +23,8 @@
 		"source=meetlens-gh-config,target=/home/vscode/.config/gh,type=volume"
 	],
 	"containerEnv": {
+		// 未設定だと POSIX ロケールになり、Claude Code などの日本語表示が崩れる
+		"LANG": "C.UTF-8",
 		"CLAUDE_CONFIG_DIR": "/home/vscode/.claude"
 	},
 	"forwardPorts": [5173, 3000],
