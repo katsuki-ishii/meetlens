@@ -21,6 +21,9 @@
 - #5 CI/CD基盤準備 — 実装が進んでから実施
 - #14 UIライブラリをVuetifyに移行 — PrimeVue有料化のため
 - #15 devcontainer による開発環境構築 — 複数PC（自宅・会社）で環境を再現するため
+- #17 会社PCの開発環境セットアップ — #15 の devcontainer を会社PCで再現
+- #18 Obsidian カンバンの導入 — GitHub Projects との役割分担を決める
+- #19 Zed で devcontainer を試す — 任意
 
 ## 要件定義
 - #13 MVP要件定義 — concept.md を元にスコープ・優先度を確定
