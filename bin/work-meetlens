@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# 開発開始コマンド: 最新を取り込み、カンバンを表示して、Claude Code に次のタスクを提案させる
+set -uo pipefail
+
+REPO_ROOT="$(cd "$(dirname "$(readlink -f "$0")")/.." && pwd)"
+cd "$REPO_ROOT"
+
+echo "== git: 最新を取り込み =="
+if [ -n "$(git status --porcelain)" ]; then
+	echo "⚠ 未コミットの変更があるため pull をスキップしました"
+	git status -s
+elif git pull --ff-only --quiet; then
+	git log --oneline -1
+else
+	echo "⚠ pull できませんでした（ローカルとリモートが分岐している可能性があります）"
+fi
+echo
+
+echo "== カンバン（MeetLens） =="
+if gh auth status >/dev/null 2>&1; then
+	gh project item-list 1 --owner katsuki-ishii --limit 100 --format json \
+		-q '[.items[] | select(.status == "In Progress" or .status == "Todo")]
+			| sort_by(.status != "In Progress", .content.number)
+			| .[] | "\(.status)\t#\(.content.number) \(.title)"' |
+		column -t -s $'\t'
+else
+	echo "⚠ gh が未ログインです。先に gh auth login を実行してください"
+fi
+echo
+
+exec claude "/next-task"

@@ -6,7 +6,10 @@ sudo apt-get update
 sudo apt-get install -y tree
 
 # volume は root 所有で作られるため、vscode ユーザーが書けるようにする
-sudo chown -R vscode:vscode /home/vscode/.claude /home/vscode/.codex
+sudo chown -R vscode:vscode /home/vscode/.claude /home/vscode/.codex /home/vscode/.config
+
+# 開発開始コマンド
+sudo ln -sf "$PWD/bin/work-meetlens" /usr/local/bin/work-meetlens
 
 pipx install aws-sam-cli
 # uvx は AWS MCP Server のプロキシ起動に使う

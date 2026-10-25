@@ -18,7 +18,9 @@
 		// Claude Code のログイン情報・設定をコンテナ作り直し後も残す
 		"source=meetlens-claude-config,target=/home/vscode/.claude,type=volume",
 		// Codex のログイン情報・設定を残す
-		"source=meetlens-codex-config,target=/home/vscode/.codex,type=volume"
+		"source=meetlens-codex-config,target=/home/vscode/.codex,type=volume",
+		// gh のログイン情報を残す
+		"source=meetlens-gh-config,target=/home/vscode/.config/gh,type=volume"
 	],
 	"containerEnv": {
 		"CLAUDE_CONFIG_DIR": "/home/vscode/.claude"
