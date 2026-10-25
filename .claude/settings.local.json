@@ -21,7 +21,6 @@
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "aws-mcp",
-    "codex",
     "vuetify",
     "context7"
   ]

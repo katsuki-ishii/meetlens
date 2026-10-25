@@ -14,7 +14,7 @@ sudo ln -sf "$PWD/bin/work-meetlens" /usr/local/bin/work-meetlens
 pipx install aws-sam-cli
 # uvx は AWS MCP Server のプロキシ起動に使う
 pipx install uv
-# codex mcp-server を Claude Code から stdio で起動する
+# Claude Code から codex exec で呼び出し、別モデルの意見をもらう（ask-codex スキル）
 npm install -g @openai/codex
 
 python -m venv backend/.venv

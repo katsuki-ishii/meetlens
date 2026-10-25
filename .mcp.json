@@ -10,11 +10,6 @@
         "AWS_REGION=ap-northeast-1"
       ]
     },
-    "codex": {
-      "type": "stdio",
-      "command": "codex",
-      "args": ["mcp-server"]
-    },
     "vuetify": {
       "type": "http",
       "url": "https://mcp.vuetifyjs.com/mcp"
