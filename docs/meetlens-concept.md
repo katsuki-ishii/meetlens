@@ -92,7 +92,7 @@ VTTから以下の指標を抽出・分析する。会議タイプに応じて�
 | データベース | Amazon DynamoDB |
 | ファイルストレージ | Amazon S3 |
 | IaC | SAM（サーバーレス部分）/ Terraform（基盤部分） |
-| CI/CD | AWS Code系サービス |
+| CI/CD | GitHub Actions |
 
 ## ロードマップ（将来）
 
