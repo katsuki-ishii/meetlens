@@ -16,16 +16,18 @@ Codex に聞く前に、自分の意見（結論と根拠）を短く書き出�
 プロンプトを scratchpad のファイルに書き、stdin で渡す（シェルのクォート崩れを防ぐ）。
 
 ```bash
-codex exec -s read-only -o <scratchpad>/codex-answer.md - < <scratchpad>/codex-prompt.md
+codex exec -s danger-full-access -o <scratchpad>/codex-answer.md - < <scratchpad>/codex-prompt.md
 ```
 
-- `-s read-only`: Codex にはファイルを読ませるだけで、変更させない。
+- `-s danger-full-access`: devcontainer 内では Codex のサンドボックス（bubblewrap）が動かず、`read-only` だとファイルを一切読めない（#23）。コンテナ自体を隔離環境とみなし、サンドボックスを使わない。
+- 書き込みは制限されないため、プロンプトで「ファイルを変更しない」と必ず指示し、実行後に `git status -s` で変更がないことを確認する。変更があれば開発者に報告する。
 - `-o`: 最終回答だけをファイルに書き出す。読むのはこのファイルだけでよい。
 - リポジトリのルートで実行する。Codex は必要に応じて docs やコードを自分で読む。
 - 時間がかかるので Bash の timeout は長め（300000 ミリ秒程度）にする。
 
 プロンプトには次を含める。
 
+- 「ファイルは読むだけで変更しないこと」という指示
 - 問いと前提（MeetLens の概要、制約。特に「学習目的の個人開発・AWS 費用は月 1000 円以下」）
 - 参照してほしいファイルのパス（docs など）
 - 「結論、根拠、懸念点を日本語で簡潔に」という回答形式
@@ -37,8 +39,10 @@ codex exec -s read-only -o <scratchpad>/codex-answer.md - < <scratchpad>/codex-p
 意見が食い違う点があれば、Claude の意見とその根拠を伝えて反論・補足を求める。前の会話を引き継ぐため `resume --last` を使う。
 
 ```bash
-codex exec resume --last -o <scratchpad>/codex-answer2.md - < <scratchpad>/codex-prompt2.md
+codex exec resume --last -c 'sandbox_mode="danger-full-access"' -o <scratchpad>/codex-answer2.md - < <scratchpad>/codex-prompt2.md
 ```
+
+`resume` には `-s` がないため、`-c` でサンドボックスの設定を渡す。実行後は同様に `git status -s` を確認する。
 
 往復は 2 回までにする。それでも食い違う点は、無理に結論を出さず「判断が必要な点」として開発者に渡す。
 
