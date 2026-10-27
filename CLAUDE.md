@@ -19,6 +19,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **進捗状態の正はGitHub Projects**。状態（Todo / In Progress / Done）はProjectsでのみ管理する。
 - **フェーズ**はIssueのラベル（`Phase 0`〜`Phase 3`）で表す。順序は 基盤準備(0) → 環境構築(1) → 要件定義・仕様作成(2) → 実装(3)。
 - **各GitHub Issue** に詳細なサブタスク（チェックリスト）を記載。
+- **Issueは1つで解決できる具体的な単位で作る**（例: 「ask-codex で Codex のサンドボックスを使わないようにする」）。タイトルを見れば何をすれば完了かが分かる粒度にし、複数の作業が混ざるなら分割する。
 - タスク着手時はIssueのステータスを更新し、完了時はクローズする。`gh` コマンドで操作する。
 - 新しいタスクが発生したらIssueを作成し、該当フェーズのラベルを付けてProjectに追加する。
 - 全体像（WBS・進捗まとめ等）が必要なときは、GitHub Projects・Issue・gitのコミット履歴からその都度作成する。常設のドキュメントは持たない。
