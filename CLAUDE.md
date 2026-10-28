@@ -26,6 +26,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   - 単独で完結するIssueに親は作らない。遠い先の作業は細分化せず、着手が近づいてから分ける。
   - 調査系のIssueには打ち切り条件を書く。目安を超えても失敗扱いせず、残りを整理して分け直す。
   - サブイシューは `gh issue create --parent <親の番号>` で作る。
+  - カンバンのボードは、フィルタ `no:sub-issues-progress` で親Issueを除き、作業（子Issueと単独のIssue）だけを表示している。
   - 判断の目安: 着手時に迷わない / 完了時に説明できる / カンバンの一覧がうるさくない。
 - タスク着手時はIssueのステータスを更新し、完了時はクローズする。`gh` コマンドで操作する。
 - 新しいタスクが発生したらIssueを作成し、該当フェーズのラベルを付けてProjectに追加する。
