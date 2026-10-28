@@ -28,6 +28,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   - サブイシューは `gh issue create --parent <親の番号>` で作る。
   - カンバンのボードは、フィルタ `no:sub-issues-progress` で親Issueを除き、作業（子Issueと単独のIssue）だけを表示している。
   - 判断の目安: 着手時に迷わない / 完了時に説明できる / カンバンの一覧がうるさくない。
+- **あとでやりたいこと**（開発中の思いつき・他の人からの提案など）は、`idea` ラベルのIssueにする。
+  - 本文は「何をしたいか・なぜ」を1〜2行。完了条件・フェーズのラベルは不要で、**Projectには追加しない**（カンバンに出さない）。提案元があればコメントに残す。
+  - 採用したら、`idea` ラベルを外して完了条件・フェーズのラベルを付け、Projectに追加する。必要なら子Issueに分ける。
+  - 見送るときは、理由を一言残して "not planned" でクローズする。
+  - `docs/requirements/mvp.md` の Out of Scope は「MVPでやらないと決めたこと」、`docs/meetlens-concept.md` のロードマップは初期構想の記録として残す。
 - タスク着手時はIssueのステータスを更新し、完了時はクローズする。`gh` コマンドで操作する。
 - 新しいタスクが発生したらIssueを作成し、該当フェーズのラベルを付けてProjectに追加する。
 - 全体像（WBS・進捗まとめ等）が必要なときは、GitHub Projects・Issue・gitのコミット履歴からその都度作成する。常設のドキュメントは持たない。
