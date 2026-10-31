@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **MeetLens** は会議の品質を分析・可視化するWebアプリケーション。VTT（字幕ファイル）トランスクリプトを処理して、議事録自動生成と品質スコアリングを実施。組織の会議文化改善を目的とする個人開発プロジェクト。
 
-**MVP**: VTT（Teams/Zoom/Webex対応）アップロード → 議事録生成 → 品質分析 → ダッシュボード表示
+**MVP**: VTT（Teams/Zoom対応）アップロード → 議事録生成 → 品質分析 → ダッシュボード表示
 
 ## プロジェクトの性質
 - このプロジェクトは学習目的の個人開発プロジェクトである。
