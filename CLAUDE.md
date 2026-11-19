@@ -10,6 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## プロジェクトの性質
 - このプロジェクトは学習目的の個人開発プロジェクトである。
+- 所属会社の社内プロジェクト「Next Tech Lead（NTL）」の一環として作っている。NTL は、ものづくりを通じて次世代につながる技術的なリードを生み出すことを目的とし、ほかのメンバーもそれぞれ別のものを作っている。
 - Bedrockやサーバーレスアーキテクチャの学習を主目的としている。
 - またTypeScript、Python、Vue.js、Vuetifyの学習も含む。
 - 個人開発かつ学習を主目的とするため、AWSの利用料は最低限になるような設計を心がける。（発生してもよいが月に1000円以下であることが望ましい。）
